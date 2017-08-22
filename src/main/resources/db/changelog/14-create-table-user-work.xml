@@ -1,0 +1,72 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+	<changeSet id="01" author="rrocher">
+		<createTable tableName="user_work"
+			remarks="A table to store the prvileges, or rights a role can have">
+			<column name="id" type="int">
+				<constraints nullable="false" unique="true" primaryKey="true" />
+			</column>
+			<column name="user" type="int">
+				<constraints nullable="false" />
+			</column>
+			<column name="company" type="varchar(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="address" type="varchar(512)">
+				<constraints nullable="false" />
+			</column>
+			<column name="phone" type="varchar(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="position" type="varchar(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="supervisor" type="varchar(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="supervisor_phone" type="varchar(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="comments" type="varchar(255)">
+				<constraints nullable="true" />
+			</column>
+			<column name="id_user_insert" type="int">
+				<constraints nullable="false" />
+			</column>
+			<column name="ts_insert" type="timestamp" defaultValue="now()">
+				<constraints nullable="false" />
+			</column>
+			<column name="id_user_update" type="int">
+				<constraints nullable="true" />
+			</column>
+			<column name="ts_update" type="timestamp" defaultValue="now()">
+				<constraints nullable="false" />
+			</column>
+			<column name="id_user_delete" type="int">
+				<constraints nullable="true" />
+			</column>
+			<column name="ts_delete" type="timestamp">
+				<constraints nullable="true" />
+			</column>
+		</createTable>
+		<addForeignKeyConstraint baseTableName="user_work"
+			baseColumnNames="user"
+			constraintName="user_work_fk1" referencedTableName="user"
+			referencedColumnNames="id" />
+		<addForeignKeyConstraint baseTableName="user_work"
+			baseColumnNames="id_user_insert"
+			constraintName="user_work_fk4" referencedTableName="user"
+			referencedColumnNames="id" />
+		<addForeignKeyConstraint baseTableName="user_work"
+			baseColumnNames="id_user_update"
+			constraintName="user_work_fk2" referencedTableName="user"
+			referencedColumnNames="id" />
+		<addForeignKeyConstraint baseTableName="user_work"
+			baseColumnNames="id_user_delete"
+			constraintName="user_work_fk3" referencedTableName="user"
+			referencedColumnNames="id" />
+	</changeSet>
+</databaseChangeLog>

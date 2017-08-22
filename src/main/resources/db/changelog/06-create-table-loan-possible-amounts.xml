@@ -1,0 +1,61 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+	<changeSet id="01" author="rrocher">
+		<createTable tableName="loan_psbl_amount"
+			remarks="A table to store the amounts a user can loan">
+			<column name="id" type="int">
+				<constraints nullable="false" unique="true" primaryKey="true" />
+			</column>
+			<column name="code" type="varchar(28)">
+				<constraints nullable="false" unique="true" />
+			</column>
+			<column name="amount" type="int">
+				<constraints nullable="false" />
+			</column>
+			<column name="currency" type="varchar(32)">
+				<constraints nullable="false" />
+			</column>
+			<column name="text" type="varchar(1024)">
+				<constraints nullable="false" />
+			</column>
+			<column name="comments" type="varchar(1024)">
+				<constraints nullable="false" />
+			</column>
+			<column name="id_user_insert" type="int">
+				<constraints nullable="false" />
+			</column>
+			<column name="ts_insert" type="timestamp" defaultValue="now()">
+				<constraints nullable="false" />
+			</column>
+			<column name="id_user_update" type="int">
+				<constraints nullable="true" />
+			</column>
+			<column name="ts_update" type="timestamp" defaultValue="now()">
+				<constraints nullable="false" />
+			</column>
+			<column name="id_user_delete" type="int">
+				<constraints nullable="true" />
+			</column>
+			<column name="ts_delete" type="timestamp">
+				<constraints nullable="true" />
+			</column>
+		</createTable>
+
+		<addForeignKeyConstraint baseTableName="loan_psbl_amount"
+			baseColumnNames="id_user_insert" constraintName="loan_psbl_amount_user_fk1"
+			referencedTableName="user" referencedColumnNames="id" />
+
+		<addForeignKeyConstraint baseTableName="loan_psbl_amount"
+			baseColumnNames="id_user_update" constraintName="loan_psbl_amount_user_fk2"
+			referencedTableName="user" referencedColumnNames="id" />
+
+		<addForeignKeyConstraint baseTableName="loan_psbl_amount"
+			baseColumnNames="id_user_delete" constraintName="loan_psbl_amount_user_fk3"
+			referencedTableName="user" referencedColumnNames="id" />
+		<addAutoIncrement columnDataType="int" columnName="id"
+			incrementBy="3" startWith="100" tableName="loan_psbl_amount" />
+	</changeSet>
+</databaseChangeLog>

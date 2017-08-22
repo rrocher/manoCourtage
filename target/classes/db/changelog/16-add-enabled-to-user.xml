@@ -1,0 +1,14 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+	<changeSet author="rrocher" id="addEnabled-to-user">
+		<addColumn tableName="user">
+		
+			<column  name="enabled" type="boolean" defaultValueBoolean="true"  >
+				<constraints nullable="false" />
+			</column>
+		</addColumn>
+	</changeSet>
+</databaseChangeLog>

@@ -1,0 +1,72 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+	<changeSet id="01" author="rrocher">
+		<createTable tableName="loan_interest_rate_payment"
+			remarks="A table to store the possible interest of a loan of a loan">
+			<column name="id" type="int">
+				<constraints nullable="false" unique="true" primaryKey="true" />
+			</column>
+			<column name="code" type="varchar(32)">
+				<constraints nullable="false" />
+			</column>
+			<column name="loan_psbl_amount" type="int">
+				<constraints nullable="false" />
+			</column>
+			<column name="loan_psbl_duration" type="int">
+				<constraints nullable="false" />
+			</column>
+			<column name="interest_rate" type="double">
+				<constraints nullable="false" />
+			</column>
+			<column name="file_fee" type="double">
+				<constraints nullable="false" />
+			</column>
+			<column name="total_payment" type="double">
+				<constraints nullable="false" />
+			</column>
+			<column name="id_user_insert" type="int">
+				<constraints nullable="false" />
+			</column>
+			<column name="ts_insert" type="timestamp" defaultValue="now()">
+				<constraints nullable="false" />
+			</column>
+			<column name="id_user_update" type="int">
+				<constraints nullable="true" />
+			</column>
+			<column name="ts_update" type="timestamp" defaultValue="now()">
+				<constraints nullable="false" />
+			</column>
+			<column name="id_user_delete" type="int">
+				<constraints nullable="true" />
+			</column>
+			<column name="ts_delete" type="timestamp">
+				<constraints nullable="true" />
+			</column>
+		</createTable>
+		<addForeignKeyConstraint baseTableName="loan_interest_rate_payment"
+			baseColumnNames="loan_psbl_amount" constraintName="loan_interest_rate_payment_fk4"
+			referencedTableName="loan_psbl_amount" referencedColumnNames="id" />
+			
+		<addForeignKeyConstraint baseTableName="loan_interest_rate_payment"
+			baseColumnNames="loan_psbl_duration" constraintName="loan_interest_rate_payment_fk6"
+			referencedTableName="loan_psbl_duration" referencedColumnNames="id" />
+
+		<addForeignKeyConstraint baseTableName="loan_interest_rate_payment"
+			baseColumnNames="id_user_insert" constraintName="loan_interest_rate_payment_fk1"
+			referencedTableName="user" referencedColumnNames="id" />
+
+		<addForeignKeyConstraint baseTableName="loan_interest_rate_payment"
+			baseColumnNames="id_user_update" constraintName="loan_interest_rate_payment_fk2"
+			referencedTableName="user" referencedColumnNames="id" />
+
+		<addForeignKeyConstraint baseTableName="loan_interest_rate_payment"
+			baseColumnNames="id_user_delete" constraintName="loan_interest_rate_payment_fk3"
+			referencedTableName="user" referencedColumnNames="id" />
+
+		<addAutoIncrement columnDataType="int" columnName="id"
+			incrementBy="3" startWith="100" tableName="loan_interest_rate_payment" />
+	</changeSet>
+</databaseChangeLog>

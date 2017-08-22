@@ -1,0 +1,68 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+	<changeSet id="01" author="rrocher">
+		<createTable tableName="loan_arrangements"
+			remarks="A table to store the loan arrangements">
+			<column name="id" type="int">
+				<constraints nullable="false" unique="true" primaryKey="true" />
+			</column>
+			<column name="loan" type="int">
+				<constraints nullable="false" />
+			</column>
+			<column name="amount_to_pay" type="double">
+				<constraints nullable="false" />
+			</column>
+			<column name="date_payment_scheduled" type="timestamp">
+				<constraints nullable="false" />
+			</column>
+			<column name="date_re_scheduled" type="timestamp">
+				<constraints nullable="true" />
+			</column>
+			<column name="nb_arrangements" type="int">
+				<constraints nullable="false" />
+			</column>
+			<column name="comments" type="varchar(1024)">
+				<constraints nullable="false" />
+			</column>
+			<column name="id_user_insert" type="int">
+				<constraints nullable="false" />
+			</column>
+			<column name="ts_insert" type="timestamp" defaultValue="now()">
+				<constraints nullable="false" />
+			</column>
+			<column name="id_user_update" type="int">
+				<constraints nullable="true" />
+			</column>
+			<column name="ts_update" type="timestamp" defaultValue="now()">
+				<constraints nullable="true" />
+			</column>
+			<column name="id_user_delete" type="int">
+				<constraints nullable="true" />
+			</column>
+			<column name="ts_delete" type="timestamp">
+				<constraints nullable="true" />
+			</column>
+		</createTable>
+		<addForeignKeyConstraint baseTableName="loan_arrangements"
+			baseColumnNames="id_user_insert" constraintName="loan_arrangements_user_fk1"
+			referencedTableName="user" referencedColumnNames="id" />
+
+		<addForeignKeyConstraint baseTableName="loan_arrangements"
+			baseColumnNames="id_user_update" constraintName="loan_arrangements_user_fk2"
+			referencedTableName="user" referencedColumnNames="id" />
+
+		<addForeignKeyConstraint baseTableName="loan_arrangements"
+			baseColumnNames="id_user_delete" constraintName="loan_arrangements_user_fk3"
+			referencedTableName="user" referencedColumnNames="id" />
+			
+		<addForeignKeyConstraint baseTableName="loan_arrangements"
+			baseColumnNames="loan"
+			constraintName="loan_arrangements_loan_fk" referencedTableName="loan"
+			referencedColumnNames="id" />
+		<addAutoIncrement columnDataType="int" columnName="id"
+			incrementBy="3" startWith="2" tableName="loan_arrangements" />
+	</changeSet>
+</databaseChangeLog>

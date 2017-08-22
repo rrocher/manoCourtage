@@ -1,0 +1,18 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+	<changeSet author="rrocher" id="addAutoIncrement-example">
+		<addAutoIncrement columnDataType="int" columnName="id"
+			incrementBy="3" startWith="100" tableName="user" />
+	</changeSet>
+	<changeSet id="01" author="rrocher">
+		<addColumn tableName="user">
+			<column name="password" type="varchar(255)" />
+		</addColumn>
+		<dropColumn columnName="work" tableName="user" />
+		<dropColumn columnName="work_address" tableName="user" />
+		<dropColumn columnName="work_phone" tableName="user" />
+	</changeSet>
+</databaseChangeLog>
